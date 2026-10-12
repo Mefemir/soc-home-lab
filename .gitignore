@@ -1,0 +1,22 @@
+# Gizli bilgiler - ASLA yüklenmez
+.env
+*.env
+secrets/
+*apikey*
+*api_key*
+*password*
+*.pem
+*.key
+
+# Büyük dosyalar (ISO, sanal disk) - GitHub bunları istemez
+*.iso
+*.vmdk
+*.ova
+*.vdi
+*.vhd
+*.vhdx
+
+# İşletim sistemi döküntüleri
+Thumbs.db
+.DS_Store
+desktop.ini
