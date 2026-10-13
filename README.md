@@ -1,18 +1,46 @@
-# SOC Ev Lab
+# SOC Ev Lab — Saldırı Simülasyonu & Detection Engineering
 
 Active Directory, Wazuh SIEM ve FortiGate'ten oluşan bir ev laboratuvarında
 **saldırı simülasyonu ve tespit (detection) çalışmaları**.
 
 Bu depo bir öğrenme ve portföy projesidir: her aşamada bir saldırı yapılır,
 saldırının loglarda bıraktığı iz bulunur ve o izi yakalayan tespit kuralı yazılır.
-Amaç, SOC analisti bakış açısıyla **saldırı → log → tespit** döngüsünü kanıtlamaktır.
+Amaç, SOC analisti bakış açısıyla **saldırı → log → tespit** döngüsünü uçtan uca kanıtlamaktır.
+
+> ⚠️ Bu lab eğitim amaçlıdır. Tüm saldırılar yalnızca kendime ait, izole bir ev
+> laboratuvarında, yetkili olduğum sistemlere karşı yapılmıştır.
+
+## Bu projede neler yaptım? (özet)
+
+- **4 saldırı zinciri** kurdum ve her birini SIEM üzerinden tespit ettim:
+  Brute Force → Kerberoasting → Credential Dumping → Lateral Movement.
+- **5 özel Wazuh tespit kuralı** yazdım (100100, 100300, 100310, 100320, 100400/100401).
+- Tespitleri **MITRE ATT&CK** ile eşleyip bir **Navigator kapsam haritası** üretip
+  **gap analizi** yaptım (bkz. Aşama 8).
+- Gerçekçi bir **olay müdahale (IR) vaka raporu** hazırladım (bkz. Aşama 9).
+- **FortiGate syslog** entegrasyonu ile çevre (perimeter) loglarını SIEM'e aldım ve
+  port tarama tespiti yazdım (Aşama 10).
+- "Hazır kural mı, özel kural mı?" muhakemesiyle **gereksiz kural yazmadan** boşlukları
+  kapattım — olgun bir detection engineering yaklaşımı (bkz. Aşama 7).
+
+## Detection Coverage (teknik → tespit)
+
+| MITRE Tekniği | Taktik | Aşama | Tespit (rule.id) | Tip |
+|---------------|--------|-------|------------------|-----|
+| **T1046** Network Service Discovery | Reconnaissance | 10 | 100400 / 100401 | Özel kural |
+| **T1110** Brute Force | Credential Access | 05 | 100100 (lvl 10) | Özel kural |
+| **T1558.003** Kerberoasting | Credential Access | 06 | 100300 (lvl 12) | Özel kural |
+| **T1003.001** LSASS Memory (Cred. Dumping) | Credential Access | 07 | 100310 + 100320 | Özel kural (imza+davranış) |
+| **T1021.002** SMB / Admin Shares | Lateral Movement | 07 | 92650 (lvl 12) | Hazır ruleset |
+| **T1569.002** Service Execution | Execution | 07 | 92307 / 7045 | Hazır ruleset |
+| **T1550.002** Pass-the-Hash | Lateral Movement | 07 | 92652 (kısmi) | Hazır (kısmi) |
+| **T1562.001** Impair Defenses | Defense Evasion | 07 | İzlenebilir (kuralsız) | Bilinen boşluk |
+
+Tam kapsam haritası ve gap analizi için → [08 - MITRE ATT&CK](08-mitre-attack/).
 
 ## Mimari
 
 ![Lab topolojisi](00-temel-ve-mimari/gorseller/topoloji.png)
-
-> Topoloji diyagramını `00-temel-ve-mimari/gorseller/topoloji.png` altına ekle
-> (draw.io ile çizilebilir).
 
 ## Ortam
 
@@ -30,24 +58,48 @@ Ayrıntılı IP planı ve bridge'in getirdiği uyarılar için
 
 ## İçindekiler
 
-- [00 - Temel ve Mimari](00-temel-ve-mimari/)
-- [01 - Active Directory](01-active-directory/)
-- [02 - Wazuh SIEM](02-wazuh-siem/)
-- [03 - Loglama ve Sysmon](03-loglama-sysmon/)
-- [04 - Keşif Tespiti](04-kesif-tespiti/)
-- [05 - Brute-force Tespiti](05-brute-force/)
-- [06 - Active Directory Saldırıları](06-ad-saldirilari/)
-- [07 - Post-exploitation](07-post-exploitation/)
-- [08 - MITRE ATT&CK ve Detection Engineering](08-mitre-attack/)
-- [09 - Olay Müdahalesi](09-olay-mudahalesi/)
-- [10 - FortiGate Entegrasyonu](10-fortigate/)
+| # | Aşama | Konu |
+|---|-------|------|
+| 00 | [Temel ve Mimari](00-temel-ve-mimari/) | Topoloji, IP planı, bridge uyarıları |
+| 01 | [Active Directory](01-active-directory/) | DC, domain, kullanıcı/servis hesapları |
+| 02 | [Wazuh SIEM](02-wazuh-siem/) | SIEM kurulumu ve ajan kaydı |
+| 03 | [Loglama ve Sysmon](03-loglama-sysmon/) | Sysmon + log görünürlüğü |
+| 04 | [Keşif Tespiti](04-kesif-tespiti/) | Reconnaissance izleri |
+| 05 | [Brute-force Tespiti](05-brute-force/) | T1110 — eşik tabanlı kural |
+| 06 | [AD Saldırıları](06-ad-saldirilari/) | T1558.003 Kerberoasting |
+| 07 | [Post-exploitation](07-post-exploitation/) | T1003.001 dumping + lateral movement |
+| 08 | [MITRE ATT&CK](08-mitre-attack/) | Detection engineering + kapsam haritası |
+| 09 | [Olay Müdahalesi](09-olay-mudahalesi/) | IR vaka raporu (IR-2026-001) |
+| 10 | [FortiGate Entegrasyonu](10-fortigate/) | Syslog + T1046 port tarama tespiti |
 
 ## Durum
 
 | Aşama | Durum |
 |-------|-------|
-| 00 - Temel ve Mimari | 🟡 Devam ediyor |
-| 01-10 | ⚪ Beklemede |
+| 00 — Temel ve Mimari | ✅ Tamamlandı |
+| 01 — Active Directory | ✅ Tamamlandı |
+| 02 — Wazuh SIEM | ✅ Tamamlandı |
+| 03 — Loglama ve Sysmon | ✅ Tamamlandı |
+| 04 — Keşif Tespiti | ✅ Tamamlandı |
+| 05 — Brute-force Tespiti | ✅ Tamamlandı |
+| 06 — AD Saldırıları (Kerberoasting) | ✅ Tamamlandı |
+| 07 — Post-exploitation | ✅ Tamamlandı |
+| 08 — MITRE ATT&CK | ✅ Tamamlandı |
+| 09 — Olay Müdahalesi | ✅ Tamamlandı |
+| 10 — FortiGate Entegrasyonu | ✅ Tamamlandı |
+
+### Yol haritası (sıradaki)
+
+- [ ] AS-REP Roasting (T1558.004) — Aşama 6 genişletmesi
+- [ ] LLMNR/NBT-NS zehirleme (T1557.001) tespiti
+- [ ] Özel kuralların **Sigma** formatına çevrilmesi (vendor-bağımsız)
+- [ ] Defender FP tuning (100321 bastırma kuralı — Aşama 7)
+
+## Kullanılan beceriler
+
+`Active Directory` · `Wazuh SIEM` · `Sysmon` · `Detection Engineering`
+`MITRE ATT&CK` · `Log Analizi` · `Incident Response` · `FortiGate` · `Kali Linux`
+`Kerberoasting` · `Credential Dumping` · `Lateral Movement`
 
 ---
 *Bu lab eğitim amaçlıdır. Tüm saldırılar yalnızca kendi izole/ev laboratuvarımda,
