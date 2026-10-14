@@ -77,14 +77,8 @@ bu yapılandırma dosyası, gürültüyü eleyip anlamlı olayları toplayan sa�
   mühendisi önce "bu saldırı hangi olayı üretir, o olayı topluyor muyum?" diye sorar.
 
 ---
+## Ekran görüntüleri
 
-## 🎓 Mülakat / sınav notları
+**Sysmon çalışıyor — Wazuh'a akan süreç oluşturma (process create) olayları:**
 
-- **Sysmon neden kurulur, Windows logu yetmez mi?** → Sysmon hash, komut satırı, ağ
-  bağlantısı, enjeksiyon gibi yerli logların vermediği derinliği sağlar.
-- **4688 için ne gerekir?** → "Audit Process Creation" denetimi + komut satırını loglamak
-  için ayrı bir GPO ayarı ("Include command line in process creation events").
-- **Log kaynağı doğrulaması nasıl yapılır?** → `auditpol /get`, `Get-WinEvent -ListLog`,
-  ve SIEM tarafında olayların gerçekten geldiğini kontrol.
-- **En kıymetli tek olay?** → Süreç oluşturma + komut satırı (Sysmon 1 / 4688); çoğu
-  saldırı burada görünür.
+![Sysmon process create olayları](gorseller/03-sysmon-process.png)

@@ -123,6 +123,17 @@ Kali (`192.168.1.105`) → `nmap -sS -T4 -p 1-1000 192.168.1.23`:
 - Uç nokta + ağ loglarını **birlikte** ilişkilendirmek (korelasyon), tek başına her birinden
   daha güçlüdür — SIEM'in asıl değeri budur.
 
+## Ekran görüntüleri
+
+**Kural kurulumu başarılı — 100400/100401 aktif, manager yeniden başlatıldı:**
+
+![FortiGate kuralı aktif](gorseller/10-kural-aktif.png)
+
+**Metodoloji — her denemede yedek alınır, `wazuh-analysisd -t` ile test edilir, hata
+çıkarsa otomatik geri alınır (güvenli config değişikliği):**
+
+![Kural testi ve geri alma](gorseller/10-kural-sorun-giderme.png)
+
 ---
 
 ## 🎓 Mülakat / sınav notları

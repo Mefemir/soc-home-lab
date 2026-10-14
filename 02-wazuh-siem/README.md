@@ -65,13 +65,12 @@ sorunları yaşatıyordu). İş akışı:
   **alarm üretmiş** (level ≥ 1) olaylar görünür. Level 0 olaylar indekslenmez.
 
 ---
+## Ekran görüntüleri
 
-## 🎓 Mülakat / sınav notları
+**Wazuh Overview — son 24 saat alarm dağılımı (severity seviyeleri):**
 
-- **SIEM ne işe yarar?** → Dağınık logları merkezileştirir, ilişkilendirir, tespit +
-  uyarı + araştırma + uyumluluk (compliance) sağlar.
-- **Agent-based vs agentless log toplama?** → Ajanlı: zengin veri, gerçek zamanlı, yük
-  uç noktada. Ajansız (syslog/WMI): kurulum kolay ama sınırlı.
-- **Bir kural neden tetiklenmez?** → Zinciri kontrol et: üretim → iletim (ajan) → ulaşım
-  (manager) → eşleşme (doğru kural ağacı). (Bunu Aşama 6'da birebir yaşadık.)
-- **False positive neden kötü?** → Analist körelir (alert fatigue), gerçek tehdidi kaçırır.
+![Wazuh overview dashboard](gorseller/02-overview-dashboard.png)
+
+**Kayıtlı ajanlar aktif — DC01 (`192.168.1.75`) ve LABPC1 (`192.168.1.85`):**
+
+![Wazuh ajanlar aktif](gorseller/02-ajanlar-aktif.png)

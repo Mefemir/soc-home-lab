@@ -210,10 +210,17 @@ Bu sıra, bir tespit kuralı tetiklenmediğinde izlenecek standart yoldur:
 
 ## 8. Ekran görüntüleri
 
-> Aşağıdaki görselleri `gorseller/` klasörüne ekle (GitHub'a yüklemeden önce).
+**Kerberos denetim alt kategorisi açık (4769 üretimi için ön koşul):**
 
-- `gorseller/06-saldiri-hash.png` — GetUserSPNs çıktısı ($krb5tgs$23$ hash)
-- `gorseller/06-hashcat-cracked.png` — hashcat ile parolanın kırılması
-- `gorseller/06-dc-getwinevent.png` — DC'de 4769 olaylarının Get-WinEvent çıktısı
-- `gorseller/06-auditpol.png` — Kerberos denetim alt kategorisinin açık olması
-- `gorseller/06-alarm-100300.png` — Wazuh'ta tetiklenen level 12 Kerberoasting alarmı
+![Gelişmiş denetim ilkesi - Kerberos](gorseller/06-auditpol.png)
+
+**Tespit mantığının doğrulanması — `wazuh-logtest` ile örnek 4769 olayı
+(serviceName `svc-sql`, `ticketEncryptionType 0x17` = RC4, kaynak Kali `192.168.1.105`):**
+
+![logtest 4769 0x17](gorseller/06-logtest-4769-0x17.png)
+
+> Henüz eklenecek görseller (saldırı tarafı tekrar çalıştırılınca yakalanacak):
+> - `06-saldiri-hash.png` — GetUserSPNs çıktısı ($krb5tgs$23$ hash)
+> - `06-hashcat-cracked.png` — hashcat ile parolanın kırılması
+> - `06-dc-getwinevent.png` — DC'de 4769 olaylarının Get-WinEvent çıktısı
+> - `06-alarm-100300.png` — Wazuh'ta tetiklenen level 12 Kerberoasting alarmı

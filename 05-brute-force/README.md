@@ -93,3 +93,13 @@ kapatma — sadece bilinen iyi deseni sustur).
   Credential Stuffing).
 - **Hesap kilitleme politikası tespiti nasıl etkiler?** → Saldırgan kilitlemeyi atlatmak
   için spraying'e döner; bu yüzden "çok hesap × az parola" desenini de izlemek gerekir.
+
+## Ekran görüntüleri
+
+**Ham kanıt — kısa sürede çok sayıda 4625 başarısız oturum açma (kural 60122):**
+
+![Başarısız oturum açma seli](gorseller/05-basarisiz-logon.png)
+
+**Tespit — özel kural 100100 tetiklendi (brute-force, level 10):**
+
+![Kural 100100 brute-force alarmı](gorseller/05-rule-100100.png)

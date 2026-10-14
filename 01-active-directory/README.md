@@ -64,13 +64,9 @@ Bir SOC analisti için DC loglarını izlemek, saldırganın kimlik hareketlerin
 tek yoludur. Sonraki aşamalarda bu olayları Wazuh'a taşıyıp tespit kuralları yazdık.
 
 ---
+## Ekran görüntüleri
 
-## 🎓 Mülakat / sınav notları
+**`lab.local` domaini — LAB-Kullanıcılar OU'su (sıradan kullanıcı `ahmet`,
+servis hesabı `svc-sql`, `IT-Ekibi` grubu):**
 
-- **"Domaine katılamıyorum" en sık sebep?** → DNS DC'yi göstermiyor.
-- **DC neden kendini DNS gösterir?** → AD, SRV kayıtlarını DNS'te tutar; DC bunları
-  kendi DNS'inde çözer, dışarı için forwarder kullanır.
-- **Kerberos vs NTLM?** → Kerberos biletlidir, daha güvenli ve varsayılandır; NTLM eski,
-  challenge-response tabanlı, pass-the-hash'e açık.
-- **AD'de en az yetki neden önemli?** → Servis hesabı Domain Admin olursa, Kerberoasting
-  gibi tek bir saldırı tüm domaini düşürür.
+![AD kullanıcıları](gorseller/01-ad-kullanicilar.png)
