@@ -52,6 +52,9 @@ schtasks /create /sc onlogon /tn "WinUpdateCheck" ^
 > erkenden yakalarız.
 
 ### 2) Özel tespit kuralları (iki katmanlı tasarım)
+> Kuralların nasıl yazıldığını (iskelet, `if_sid`/`if_group`/`field`, alan adını bulma,
+> test döngüsü) adım adım anlatan genel rehber için → [Aşama 05 — Wazuh kuralı nasıl yazılır?](../05-brute-force/#wazuh-kuralı-nasıl-yazılır-bu-repodaki-ilk-kural-burada)
+
 `/var/ossec/etc/rules/local_rules.xml`:
 ```xml
 <group name="sysmon,persistence,attack,">
@@ -93,6 +96,20 @@ schtasks /create /sc onlogon /tn "WinUpdateCheck" ^
 
 </group>
 ```
+
+### Kuralı parça parça (taban → çocuk zinciri)
+| Satır | Ne yapar |
+|-------|----------|
+| `<rule id="100500" level="8">` | **Taban** kural; sadece "oldu" der, gürültü yapmaz |
+| `<if_group>sysmon</if_group>` + `<field ...eventID>^13$</field>` | Sysmon **Event 13** (registry yazma) |
+| `<field name="win.eventdata.targetObject" type="pcre2">(?i)\\+CurrentVersion\\+Run(Once)?\\+</field>` | Yazılan registry yolu bir **Run anahtarı** mı? `\\+` = bir ya da daha fazla ters bölü (eventchannel çiftler!), `(Once)?` = Run veya RunOnce |
+| `<rule id="100501" level="12">` + `<if_sid>100500</if_sid>` | **Çocuk:** yalnızca 100500 eşleştikten sonra değerlendirilir |
+| `<field name="win.eventdata.details" type="pcre2">(?i)(powershell\|-enc\|\\+temp\\+\|...)</field>` | Yazılan **komut şüpheli mi** (powershell, kodlanmış komut, geçici dizin...)? Varsa seviye 8→**12**'ye yükselir |
+
+> **Zincirin özü:** taban kural *tüm* Run key yazmalarını görür (meşru yazılım dahil =
+> BTP, level 8'de kalır); çocuk kural sadece saldırgan desenini *yükseltir* (TP adayı,
+> level 12). `schtasks` çifti (100510/100511) de birebir aynı taban→çocuk mantığını
+> Event 1 üzerinde uygular.
 
 **İki katmanlı mantık (Aşama 11 triyajının kurala gömülmesi):** Taban kural (level 8)
 *gördüğünü* söyler ama alarm seline yol açmaz — meşru yazılım da Run key/scheduled task

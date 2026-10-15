@@ -141,6 +141,19 @@ yüksek seviyeli bir alarma çevirmektir.
 </group>
 ```
 
+### Kuralı parça parça (100300)
+| Satır | Ne yapar |
+|-------|----------|
+| `<if_group>windows_security</if_group>` | Her Windows Security olayının **alt dalında** değerlendir (çözümleme sırası: olay önce temel kurala düşer, sonra buraya) |
+| `<field name="win.system.eventID">^4769$</field>` | Sadece **Event 4769** (TGS/servis bileti isteği); `^4769$` = tam eşleşme (47690 gibi başka id'lere kaymaz) |
+| `<field name="win.eventdata.ticketEncryptionType">^0x17$</field>` | Bilet **RC4 (0x17)** ile şifreli → Kerberoasting'in imzası (normal trafik AES 0x11/0x12 kullanır) |
+| `<description>... $(win.eventdata.serviceName) ... $(win.eventdata.ipAddress)</description>` | **Dinamik enterpolasyon:** `$(alan)` alarm metnine o olayın **canlı değerini** basar (hedef servis + kaynak IP) → analist tek bakışta bağlamı görür |
+| `<mitre><id>T1558.003</id></mitre>` | ATT&CK eşlemesi (Kerberoasting) |
+
+> **İki `field` = VE mantığı:** Bir kuraldaki birden çok `<field>`'in **hepsi** eşleşmelidir.
+> Yani "Event 4769 **ve** şifreleme 0x17" — ikisi birden olmazsa alarm düşmez. Tek başına
+> çok yaygın olan 4769'u, "RC4 ile" koşulu daraltıp saldırıya özgü hale getirir.
+
 **Neden `if_group` (ve neden `decoded_as` değil):** İlk denediğimiz `decoded_as
 windows_eventchannel` kuralı, Wazuh'un temel kural ağacıyla *yarışıp kaybediyordu*
 (atomik sibling olarak öncelik alamıyordu). `if_group windows_security` ile kural,

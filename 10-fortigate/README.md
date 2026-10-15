@@ -96,6 +96,25 @@ bölündü ve yerleşik kurallar (81633 app-ctrl, 81638 virus, 81644 malicious U
 </group>
 ```
 
+### Kuralı parça parça (100400 + 100401 — iki aşamalı korelasyon)
+**100400 (yem / sessiz taban):**
+| Satır | Ne yapar |
+|-------|----------|
+| `<if_group>fortigate</if_group>` | Her FortiGate olayının altında değerlendir |
+| `<action type="pcre2">(?i)(deny\|denied\|dropped\|blocked)</action>` | **Engellenen** bir bağlantıysa. Dikkat: `action` statik alandır → `<field>` değil, kendi `<action>` etiketiyle eşlenir |
+| `level="0"` | **Sessiz:** tek deny alarm üretmez (bir tarama ~1768 deny çıkarır), yalnızca korelasyona yem olur |
+
+**100401 (asıl alarm):**
+| Satır | Ne yapar |
+|-------|----------|
+| `frequency="10" timeframe="30"` | **Eşik:** 30 saniyede 10 kez |
+| `<if_matched_sid>100400</if_matched_sid>` | "100400 eşik kadar tekrarlarsa" tetikle |
+| `<same_source_ip />` | O 10 deny'in **hepsi aynı kaynaktan** olmalı → tek bir tarayıcıyı işaret eder (bu olmadan farklı IP'lerden gelen deny'ler yanlışça birleşir) |
+| `level="10"` + `<mitre>T1046</mitre>` + `<group>port_scan,...</group>` | Alarm seviyesi, ATT&CK eşlemesi ve ek etiketler |
+
+> Bu desen (sessiz yem + korelasyon alarmı) Aşama 05'teki brute-force (100100) ile **aynı
+> mantıktır:** tek olay değil, "kısa sürede çok tekrar" örüntüsü alarm verir.
+
 > **Önemli ders — `action` static alandır:** Wazuh'ta `action`, `srcip`, `dstip` gibi
 > alanlar `<field name="...">` ile değil, kendi etiketleriyle (`<action>`) eşlenir. Aksi
 > halde `ERROR: Field 'action' is static` alınır.
@@ -135,13 +154,3 @@ Kali (`192.168.1.105`) → `nmap -sS -T4 -p 1-1000 192.168.1.23`:
 ![Kural testi ve geri alma](gorseller/10-kural-sorun-giderme.png)
 
 ---
-
-## 🎓 Mülakat / sınav notları
-
-- **Neden firewall logu SIEM'e gönderilir?** → Merkezi görünürlük, korelasyon, uzun süreli
-  saklama ve uyumluluk için.
-- **Inline firewall vs log kaynağı farkı?** → Inline trafiği engelleyebilir; log kaynağı
-  sadece görünürlük sağlar (bizim bridge kurgusundaki durum).
-- **Syslog nedir?** → Cihazların standart biçimde log gönderdiği protokol (UDP/TCP 514).
-- **Ağ mı uç nokta mı daha iyi tespit?** → İkisi birbirini tamamlar; en iyi tespit her ikisinin
-  korelasyonudur.
