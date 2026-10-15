@@ -14,7 +14,8 @@ Amaç, SOC analisti bakış açısıyla **saldırı → log → tespit** döngü
 
 - **4 saldırı zinciri** kurdum ve her birini SIEM üzerinden tespit ettim:
   Brute Force → Kerberoasting → Credential Dumping → Lateral Movement.
-- **5 özel Wazuh tespit kuralı** yazdım (100100, 100300, 100310, 100320, 100400/100401).
+- **Çok sayıda özel Wazuh tespit kuralı** yazdım (brute-force, Kerberoasting, credential
+  dumping, port tarama, **persistence**) ve her birini gerçek saldırı testiyle doğruladım.
 - Tespitleri **MITRE ATT&CK** ile eşleyip bir **Navigator kapsam haritası** üretip
   **gap analizi** yaptım (bkz. Aşama 8).
 - Gerçekçi bir **olay müdahale (IR) vaka raporu** hazırladım (bkz. Aşama 9).
@@ -28,6 +29,8 @@ Amaç, SOC analisti bakış açısıyla **saldırı → log → tespit** döngü
 | MITRE Tekniği | Taktik | Aşama | Tespit (rule.id) | Tip |
 |---------------|--------|-------|------------------|-----|
 | **T1046** Network Service Discovery | Reconnaissance | 10 | 100400 / 100401 | Özel kural |
+| **T1547.001** Registry Run Keys | Persistence | 14 | 100500 / 100501 (lvl 12) | Özel kural (2 katmanlı) |
+| **T1053.005** Scheduled Task | Persistence | 14 | 100510 / 100511 (lvl 12) | Özel kural (2 katmanlı) |
 | **T1110** Brute Force | Credential Access | 05 | 100100 (lvl 10) | Özel kural |
 | **T1558.003** Kerberoasting | Credential Access | 06 | 100300 (lvl 12) | Özel kural |
 | **T1003.001** LSASS Memory (Cred. Dumping) | Credential Access | 07 | 100310 + 100320 | Özel kural (imza+davranış) |
@@ -72,6 +75,7 @@ Ayrıntılı IP planı ve bridge'in getirdiği uyarılar için
 | 09 | [Olay Müdahalesi](09-olay-mudahalesi/) | IR vaka raporu (IR-2026-001) |
 | 10 | [FortiGate Entegrasyonu](10-fortigate/) | Syslog + T1046 port tarama tespiti |
 | 11 | [Alarm Triyajı ve Playbook'lar](11-alarm-triyaji/) | Alert triage + TP/FP/BTP + 3 triyaj playbook'u |
+| 14 | [Persistence (Kalıcılık)](14-persistence/) | T1547.001 Run key + T1053.005 scheduled task |
 
 ## Durum
 
@@ -89,6 +93,7 @@ Ayrıntılı IP planı ve bridge'in getirdiği uyarılar için
 | 09 — Olay Müdahalesi | ✅ Tamamlandı |
 | 10 — FortiGate Entegrasyonu | ✅ Tamamlandı |
 | 11 — Alarm Triyajı ve Playbook'lar | ✅ Tamamlandı |
+| 14 — Persistence (Kalıcılık) | ✅ Tamamlandı |
 
 ### Yol haritası (sıradaki)
 
@@ -102,6 +107,7 @@ Ayrıntılı IP planı ve bridge'in getirdiği uyarılar için
 `Active Directory` · `Wazuh SIEM` · `Sysmon` · `Detection Engineering`
 `MITRE ATT&CK` · `Log Analizi` · `Incident Response` · `FortiGate` · `Kali Linux`
 `Kerberoasting` · `Credential Dumping` · `Lateral Movement` · `Alert Triage` · `Playbook`
+`Persistence` · `Sysmon`
 
 ---
 *Bu lab eğitim amaçlıdır. Tüm saldırılar yalnızca kendi izole/ev laboratuvarımda,
