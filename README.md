@@ -71,6 +71,7 @@ Ayrıntılı IP planı ve bridge'in getirdiği uyarılar için
 | 08 | [MITRE ATT&CK](08-mitre-attack/) | Detection engineering + kapsam haritası |
 | 09 | [Olay Müdahalesi](09-olay-mudahalesi/) | IR vaka raporu (IR-2026-001) |
 | 10 | [FortiGate Entegrasyonu](10-fortigate/) | Syslog + T1046 port tarama tespiti |
+| 11 | [Alarm Triyajı ve Playbook'lar](11-alarm-triyaji/) | Alert triage + TP/FP/BTP + 3 triyaj playbook'u |
 
 ## Durum
 
@@ -87,6 +88,7 @@ Ayrıntılı IP planı ve bridge'in getirdiği uyarılar için
 | 08 — MITRE ATT&CK | ✅ Tamamlandı |
 | 09 — Olay Müdahalesi | ✅ Tamamlandı |
 | 10 — FortiGate Entegrasyonu | ✅ Tamamlandı |
+| 11 — Alarm Triyajı ve Playbook'lar | ✅ Tamamlandı |
 
 ### Yol haritası (sıradaki)
 
@@ -99,7 +101,7 @@ Ayrıntılı IP planı ve bridge'in getirdiği uyarılar için
 
 `Active Directory` · `Wazuh SIEM` · `Sysmon` · `Detection Engineering`
 `MITRE ATT&CK` · `Log Analizi` · `Incident Response` · `FortiGate` · `Kali Linux`
-`Kerberoasting` · `Credential Dumping` · `Lateral Movement`
+`Kerberoasting` · `Credential Dumping` · `Lateral Movement` · `Alert Triage` · `Playbook`
 
 ---
 *Bu lab eğitim amaçlıdır. Tüm saldırılar yalnızca kendi izole/ev laboratuvarımda,
