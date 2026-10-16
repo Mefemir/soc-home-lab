@@ -180,18 +180,16 @@ kapatma — sadece bilinen iyi deseni sustur).
 - **Logon Type** her zaman kontrol edilir: Type 3 (ağ) ve Type 10 (RDP) saldırılarda yaygın.
 
 ---
+## Kanıt — alarm detayı (Wazuh)
 
-## 🎓 Mülakat / sınav notları
-
-- **Eşiği neye göre seçtin?** → Ortamın normaline göre (baseline). Önce logları izleyip
-  normal hata oranını ölç, eşiği onun belirgin üstüne koy.
-- **Şifresini unutan kullanıcıyı saldırgandan nasıl ayırırsın?** → Hız/hacim (insan 3-4
-  dener, bot yüzlerce), kaynak IP, saat, farklı hesaplara yayılma (spraying), başarı sonrası
-  davranış.
-- **Brute-force MITRE?** → **T1110** (alt teknikler: Password Guessing, Password Spraying,
-  Credential Stuffing).
-- **Hesap kilitleme politikası tespiti nasıl etkiler?** → Saldırgan kilitlemeyi atlatmak
-  için spraying'e döner; bu yüzden "çok hesap × az parola" desenini de izlemek gerekir.
+```text
+# Wazuh alarmı — rule.id 100100 (level 10)
+rule.description : Brute Force: kisa surede cok sayida basarisiz Windows oturum acma denemesi
+rule.mitre       : T1110 — Brute Force (Credential Access)
+agent.name       : DC01 (192.168.1.75)   # domain hesabı doğrulaması DC'de olur
+korele olay      : 60122 / Event 4625 (başarısız oturum açma) — eşik: 120 sn'de 5+
+kaynak           : 192.168.1.85 (LABPC1, LAB\ahmet denemeleri)
+```
 
 ## Ekran görüntüleri
 

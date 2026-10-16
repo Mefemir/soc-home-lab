@@ -161,6 +161,23 @@ kalır, gerçek tehdit öne çıkar.
 - [x] eventchannel çift-ters-bölü tuzağının teşhisi ve çözümü
 - [ ] Ekran görüntüleri (`gorseller/` — 100501 ve 100511 alarmları eklenecek)
 
+## Kanıt — alarm detayı (Wazuh)
+
+```text
+# rule.id 100501 (level 12) — Registry Run key
+rule.description : Persistence (YUKSEK): Supheli Run key komutu - powershell -enc ... (T1547.001)
+image            : C:\Windows\system32\reg.exe
+targetObject     : HKU\...\Software\Microsoft\Windows\CurrentVersion\Run\Updater4
+details          : powershell -enc ZQBjAGgAbwAgAHAAdwBuAGUAZAA=
+mitre            : T1547.001 — Registry Run Keys / Startup Folder (Persistence)
+
+# rule.id 100511 (level 12) — Scheduled Task
+rule.description : Persistence (YUKSEK): Supheli zamanlanmis gorev ... (T1053.005)
+image            : C:\Windows\System32\schtasks.exe
+commandLine      : schtasks /create /sc onlogon /tn "WinUpdateCheck" /tr "powershell -enc ..." /f
+mitre            : T1053.005 — Scheduled Task (Persistence)
+```
+
 ## Ekran görüntüleri
 
 > Henüz eklenecek görseller: Wazuh'ta **100501** (Run key, level 12) ve **100511**

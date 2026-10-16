@@ -161,11 +161,16 @@ her Security olayını süzen temel kuralın **alt dalına** girer ve öncelik k
 
 ### Doğrulama (üretilen alarm)
 ```
-rule.id:            100300
-rule.level:         12
-rule.description:   Kerberoasting suphesi: RC4 (0x17)... Hedef servis: svc-sql, kaynak IP: ::ffff:192.168.1.105
-rule.groups:        windows, kerberos, attack
-rule.mitre.technique: Kerberoasting
+rule.id:              100300
+rule.level:           12
+rule.description:     Kerberoasting suphesi: RC4 (0x17) sifreli servis bileti istendi (T1558.003). Hedef servis: svc-sql, kaynak IP: ::ffff:192.168.1.105
+rule.mitre.technique: Kerberoasting (T1558.003 — Credential Access)
+agent.name:           DC01
+eventID:              4769 (Kerberos servis bileti isteği)
+serviceName:          svc-sql
+ticketEncryptionType: 0x17 (RC4 — saldırı imzası; normal trafik 0x12/AES)
+targetUserName:       ahmet@LAB.LOCAL
+ipAddress:            ::ffff:192.168.1.105 (Kali — saldırgan)
 ```
 
 ### Yanlış pozitif (FP) notu
