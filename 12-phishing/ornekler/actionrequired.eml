@@ -1,0 +1,84 @@
+Delivered-To: johncarl598@gmail.com
+Received: by 2002:a05:6504:1acd:b0:24e:f37:9311 with SMTP id q13csp513334ltx;
+        Fri, 8 Dec 2023 02:34:00 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF7ZJQi0+tGzZ3RvSLIcwCc/fodKBPBwThCk8QtRuXxX7SkL5lM7MAN0SpE5xmo48+hF6De
+X-Received: by 2002:a81:ae47:0:b0:5d2:1b58:174 with SMTP id g7-20020a81ae47000000b005d21b580174mr3791522ywk.25.1702031639999;
+        Fri, 08 Dec 2023 02:33:59 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1702031639; cv=none;
+        d=google.com; s=arc-20160816;
+        b=pm36czXfyifZrzE27IlnuGg1Ev9LA44hy7gV7NdrpuNmeP6K0AcJ0fNwVL6QEqUu3d
+         sk+Z6OBNu0sluDA88y+c5v0tUHzHIaMcZjDWS3QF9nMUBz5NYUYYB92Gw/V/YXE9TQW5
+         6sgW6/DR303sgl19aHQXrwRacyEFuBDzj0vvyIR8BnCAeyZJud6P40MOwkzeW3TGrdoG
+         v5uMg3XUckV1awJIuxaqF2oVlSQ1EVfqCYUR5kklMA3798uADXtxg1F/R23FNZokFQnF
+         QEvrbBoBWL7Wwrri5CwY2r5ma30An28G8pK0g7Z494vz/F/JIdmRJLFZYqUVHZ/zm+YD
+         j9aA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=content-transfer-encoding:from:to:subject:message-id:date
+         :mime-version;
+        bh=bgEo5uC7wzTiw3jNqxYO+W5iTuzDkyS1612ij6JsDP0=;
+        fh=+7EV0f1K7XAT+UlWKkMvBEl78VHO0A+lQaHjCEaF3Js=;
+        b=k1kKaJIJcIe7SUzfKK5HpW2a66BKXAivNhjmpQfLoiTBP/mfPvbJHlrwbGX168yqW6
+         5aIJG8+BDnVTJAwxl2qknbPB8X6tSbVB8ZsylaGndG/gWcdgCn/3m5st87RJvqHnYGtQ
+         +NyoZEHESZsP1w72PewTNqO02VfKovumScQnEYupa1Yq3HaBk62aG5mJlndMHHW1XStF
+         0WM6llIXBGzCGiNf0uiXgsjHS3JFKny1B7LxOMzuudRFy7JfryPIin7PavhBWKuE6eKf
+         5nEU+J5RBA6/CudHF5BlIsLv5O6ng0eo64vONo/XaxSwjXNRXHwmFJNL4ykgCzxt3dWw
+         gEgA==
+ARC-Authentication-Results: i=1; mx.google.com;
+       spf=pass (google.com: domain of administrator@updatecenter.com designates 173.201.193.231 as permitted sender) smtp.mailfrom=administrator@updatecenter.com
+Return-Path: <administrator@updatecenter.com>
+Received: from p3plsmtpa09-02.prod.phx3.secureserver.net (p3plsmtpa09-02.prod.phx3.secureserver.net. [173.201.193.231])
+        by mx.google.com with ESMTPS id z5-20020a0cfec5000000b0067ad10349b5si1790655qvs.252.2023.12.08.02.33.59
+        for <johncarl598@gmail.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Fri, 08 Dec 2023 02:33:59 -0800 (PST)
+Received-SPF: pass (google.com: domain of administrator@updatecenter.com designates 173.201.193.231 as permitted sender) client-ip=173.201.193.231;
+Authentication-Results: mx.google.com;
+       spf=pass (google.com: domain of administrator@updatecenter.com designates 173.201.193.231 as permitted sender) smtp.mailfrom=administrator@updatecenter.com
+Received: from gophish ([165.22.86.103])
+	by :SMTPAUTH: with ESMTPSA
+	id BYAirVWOo86hgBYAkrSLoq; Fri, 08 Dec 2023 03:33:30 -0700
+X-CMAE-Analysis: v=2.4 cv=bYitEsDB c=1 sm=1 tr=0 ts=6572f0fa
+ a=atE4/o9/vVZUCwEcOgwz7Q==:117 a=atE4/o9/vVZUCwEcOgwz7Q==:17
+ a=IkcTkHD0fZMA:10 a=Xm_zKghqSJoA:10 a=ovPjrgKtAAAA:8 a=M-5STxRAEFspZjUyIgEA:9
+ a=_W_S_7VecoQA:10 a=QEXdDO2ut3YA:10 a=zZCYzV9kfG8A:10
+ a=1vPt38zm7A8dlQKLwWPV:22 a=NlrA8xDONOgQUbfV47pp:22
+X-SECURESERVER-ACCT: administrator@updatecenter.com
+Mime-Version: 1.0
+Date: Fri, 08 Dec 2023 10:33:59 +0000
+Message-Id: <1702031639070104745.908.5749950102840792145@gophish>
+Subject: Important Update in E-Mail Systems
+To: "John Battom" <johncarl598@gmail.com>
+From: "System Security" <administrator@updatecenter.com>
+X-Mailer: gophish
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-CMAE-Envelope: MS4xfE7ou5VdwafermsDYvC6gjlkOVfzWfb/ger6NVPJtKOaocs9NYsE4sQvpn/osuZRbLwiRRfFMoXh2RREJIjYopmzoHO0Md85Hwcys2x3JwMKi0Jcb9BG
+ GEg/HmsG/trvBgl9gmpLEGx/rhK4Fw3swtrwdoNx5ugLHUI0L6y15N820jdRT0/A+Dc0u71C3XnieZKoeGRoDLLPRc8kcziAGMI=
+
+<html>
+<head>
+	<title></title>
+</head>
+<body data-gr-ext-installed=3D"" data-new-gr-c-s-check-loaded=3D"14.1123.0"=
+>
+<p>Dear Employees,</p>
+
+<p>As a result of the updates made to our institution&#39;s e-mail servers,=
+ we received feedback that there were connection problems. To prevent furth=
+er connection problems, check your access via the link below:</p>
+
+<p><br />
+<a href=3D"https://updatecenter.com?rid=3DxHn2EWg">ACCESS CONTROL=
+</a></p>
+
+<p>Provide your information, we wish you good work.</p>
+
+<p>System Adminsitrator Group</p>
+
+<p>&nbsp;</p>
+
+<p><img alt=3D'' style=3D'display: none' src=3D'https://updatecenter.com/track?rid=3DxHn2EWg'/></p>
+<grammarly-desktop-integration data-grammarly-shadow-root=3D"true"></gramma=
+rly-desktop-integration></body>
+</html>
+
