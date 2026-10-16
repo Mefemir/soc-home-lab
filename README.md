@@ -81,6 +81,10 @@ Ayrıntılı IP planı ve bridge'in getirdiği uyarılar için
 | 15 | [Command & Control (C2)](15-c2/) | T1071 — şüpheli süreç dışarı bağlantısı + beaconing |
 | 17 | [Exfiltration / DNS Tunneling](17-exfiltration/) | T1048 — DNS tüneli: hacim + uzun subdomain |
 
+> **Numaralandırma notu:** Klasör numaraları birer **konu etiketidir**, kesintisiz bir sıra
+> değil. Öğrenme yolu saldırı kill-chain'ine göre ilerlediği için bazı numaralar (12 Phishing,
+> 13 Threat Intel, 16, 18–21) **yol haritasında sırada bekliyor** ve eklendikçe dolacak.
+
 ## Durum
 
 | Aşama | Durum |
