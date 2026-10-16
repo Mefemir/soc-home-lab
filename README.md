@@ -110,7 +110,7 @@ Ayrıntılı IP planı ve bridge'in getirdiği uyarılar için
 - [ ] AS-REP Roasting (T1558.004) — Aşama 6 genişletmesi
 - [ ] LLMNR/NBT-NS zehirleme (T1557.001) tespiti
 - [ ] Özel kuralların **Sigma** formatına çevrilmesi (vendor-bağımsız)
-- [ ] Defender FP tuning (100321 bastırma kuralı — Aşama 7)
+- [x] Defender/sistem süreci LSASS FP tuning (100321 allowlist — Aşama 7) ✅
 
 ## Kullanılan beceriler
 
