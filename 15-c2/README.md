@@ -129,7 +129,7 @@ MITRE eşlemesi otomatik geldi: **Command and Control / Application Layer Protoc
 6 bağlantı yaptık ama Wazuh'a **1 Event 3** geldi: Sysmon, **aynı süreç → aynı IP:port**
 hızlı tekrarlarını tekilleştirir. Beacon eşiği (5+) dolmadı. **Çözüm:** bağlantıları
 **farklı portlara** (4444–4449) çevirdik → her biri ayrı olay → 5+ olay → 100601 düştü.
-*Mülakat notu: EDR/Sysmon tekilleştirmesi beacon hacmini gizleyebilir; korelasyonu buna
+*Not: EDR/Sysmon tekilleştirmesi beacon hacmini gizleyebilir; korelasyonu buna
 göre tasarla.*
 
 > **Debug zinciri (ezberle):** bir kural tetiklenmiyorsa sebep dörtten biri —
@@ -146,16 +146,3 @@ göre tasarla.*
 | Teknik | Taktik | Kural |
 |--------|--------|-------|
 | **T1071** Application Layer Protocol | Command and Control | 100600 / 100601 |
-
-## Ekran görüntüleri
-> Wazuh'ta **100600** (powershell→4444) ve **100601** (beaconing, `previous_output`'ta
-> korele bağlantılar) alarmlarının ekran görüntülerini `gorseller/` altına ekle.
-
----
-
-## 🎓 Mülakat / sınav notları
-- **C2 nedir?** → Ele geçmiş makine ile saldırgan sunucusu arasındaki uzaktan yönetim kanalı (TA0011).
-- **Reverse shell vs beacon?** → Reverse shell = sürekli açık hat (gürültülü); beacon = aralıklı check-in (gizli, modern standart).
-- **C2'yi hangi olayla yakalarsın?** → Sysmon Event 3; özellikle powershell/rundll32 gibi süreçlerin dışarı çıkması + beaconing deseni.
-- **C2 tespiti neden FP'ye yatkın?** → Her uygulama ağ bağlantısı açar; "bağlantı var" değil "beklenmedik süreç / beacon deseni" aranır.
-- **Beacon hacmi neden az loglanabilir?** → Sysmon/EDR aynı 5-tuple tekrarlarını tekilleştirir; korelasyonu buna göre kur.

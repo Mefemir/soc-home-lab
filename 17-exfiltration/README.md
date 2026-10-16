@@ -139,16 +139,3 @@ bir alana yapsa = **TP adayı**. Triyaj için bkz. [Aşama 11](../11-alarm-triya
 |--------|--------|-------|
 | **T1071.004** Application Layer Protocol: DNS | Command and Control | 100700 |
 | **T1048** Exfiltration Over Alternative Protocol | Exfiltration | 100701 / 100702 |
-
-## Ekran görüntüleri
-> Wazuh'ta **100701** (yüksek hacim) ve **100702** (uzun subdomain, `queryName` görünür)
-> alarmlarının ekran görüntülerini `gorseller/` altına ekle.
-
----
-
-## 🎓 Mülakat / sınav notları
-- **Exfiltration nedir?** → Veriyi ele geçmiş ağdan dışarı taşıma (TA0010); savunmanın son hattı.
-- **Neden DNS tunneling?** → DNS engellenmez ve özyineleme ile saldırganın yetkili sunucusuna ulaşır; veri subdomain etiketlerine gizlenir.
-- **Hangi olayla yakalarsın?** → Sysmon Event 22; şüpheli süreç + aynı üst alana yüksek hacim + uzun/rastgele subdomain + TXT/NULL.
-- **Neden FP'ye yatkın?** → CDN/telemetri de uzun/çok DNS üretir; "çok sorgu" değil "beklenmedik süreç + anormal desen + hacim" aranır.
-- **Event 22 sorgu çözülmese de loglanır mı?** → Evet; süreç DNS'e sorduğu anda üretilir (NXDOMAIN dahi olsa) — tespit istemci tarafında çalışır.

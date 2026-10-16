@@ -159,7 +159,6 @@ kalır, gerçek tehdit öne çıkar.
 - [x] İki teknik için iki katmanlı özel kurallar (100500/100501, 100510/100511)
 - [x] Gerçek saldırı testiyle doğrulama (100501 + 100511, level 12)
 - [x] eventchannel çift-ters-bölü tuzağının teşhisi ve çözümü
-- [ ] Ekran görüntüleri (`gorseller/` — 100501 ve 100511 alarmları eklenecek)
 
 ## Kanıt — alarm detayı (Wazuh)
 
@@ -177,21 +176,3 @@ image            : C:\Windows\System32\schtasks.exe
 commandLine      : schtasks /create /sc onlogon /tn "WinUpdateCheck" /tr "powershell -enc ..." /f
 mitre            : T1053.005 — Scheduled Task (Persistence)
 ```
-
-## Ekran görüntüleri
-
-> Henüz eklenecek görseller: Wazuh'ta **100501** (Run key, level 12) ve **100511**
-> (scheduled task, level 12) alarmlarının ekran görüntüleri.
-
----
-
-## 🎓 Mülakat / sınav notları
-- **Persistence nedir, neden gerekir?** → Yeniden başlatma/oturum sonrası erişimi korumak.
-- **En yaygın Windows persistence teknikleri?** → Run key (T1547.001), Scheduled Task
-  (T1053.005), Service (T1543.003), WMI subscription (T1546.003).
-- **Run key'i hangi olayla yakalarsın?** → Sysmon Event 13 (RegistryValueSet), `targetObject`
-  içinde `\CurrentVersion\Run`.
-- **Scheduled task kanıtı?** → Sysmon Event 1'de `schtasks /create` + Windows Event 4698.
-- **Komut başarısız olsa bile tespit neden düşebilir?** → Sysmon Event 1 süreç başlatmayı
-  loglar; komutun sonucu önemli değil.
-- **eventchannel regex tuzağı?** → Ters bölüler çiftlenir (`\\`); desende `\\+` kullan.
