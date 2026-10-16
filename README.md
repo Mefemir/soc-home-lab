@@ -31,6 +31,7 @@ Amaç, SOC analisti bakış açısıyla **saldırı → log → tespit** döngü
 | **T1046** Network Service Discovery | Reconnaissance | 10 | 100400 / 100401 | Özel kural |
 | **T1547.001** Registry Run Keys | Persistence | 14 | 100500 / 100501 (lvl 12) | Özel kural (2 katmanlı) |
 | **T1053.005** Scheduled Task | Persistence | 14 | 100510 / 100511 (lvl 12) | Özel kural (2 katmanlı) |
+| **T1071** Application Layer Protocol (C2) | Command and Control | 15 | 100600 (lvl 10) / 100601 beaconing (lvl 13) | Özel kural (2 katmanlı) |
 | **T1110** Brute Force | Credential Access | 05 | 100100 (lvl 10) | Özel kural |
 | **T1558.003** Kerberoasting | Credential Access | 06 | 100300 (lvl 12) | Özel kural |
 | **T1003.001** LSASS Memory (Cred. Dumping) | Credential Access | 07 | 100310 + 100320 | Özel kural (imza+davranış) |
@@ -76,6 +77,7 @@ Ayrıntılı IP planı ve bridge'in getirdiği uyarılar için
 | 10 | [FortiGate Entegrasyonu](10-fortigate/) | Syslog + T1046 port tarama tespiti |
 | 11 | [Alarm Triyajı ve Playbook'lar](11-alarm-triyaji/) | Alert triage + TP/FP/BTP + 3 triyaj playbook'u |
 | 14 | [Persistence (Kalıcılık)](14-persistence/) | T1547.001 Run key + T1053.005 scheduled task |
+| 15 | [Command & Control (C2)](15-c2/) | T1071 — şüpheli süreç dışarı bağlantısı + beaconing |
 
 ## Durum
 
@@ -94,6 +96,7 @@ Ayrıntılı IP planı ve bridge'in getirdiği uyarılar için
 | 10 — FortiGate Entegrasyonu | ✅ Tamamlandı |
 | 11 — Alarm Triyajı ve Playbook'lar | ✅ Tamamlandı |
 | 14 — Persistence (Kalıcılık) | ✅ Tamamlandı |
+| 15 — Command & Control (C2) | ✅ Tamamlandı |
 
 ### Yol haritası (sıradaki)
 
@@ -107,7 +110,7 @@ Ayrıntılı IP planı ve bridge'in getirdiği uyarılar için
 `Active Directory` · `Wazuh SIEM` · `Sysmon` · `Detection Engineering`
 `MITRE ATT&CK` · `Log Analizi` · `Incident Response` · `FortiGate` · `Kali Linux`
 `Kerberoasting` · `Credential Dumping` · `Lateral Movement` · `Alert Triage` · `Playbook`
-`Persistence` · `Sysmon`
+`Persistence` · `Sysmon` · `Command & Control` · `Beaconing` · `Network Detection`
 
 ---
 *Bu lab eğitim amaçlıdır. Tüm saldırılar yalnızca kendi izole/ev laboratuvarımda,
