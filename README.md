@@ -78,13 +78,14 @@ Ayrıntılı IP planı ve bridge'in getirdiği uyarılar için
 | 10 | [FortiGate Entegrasyonu](10-fortigate/) | Syslog + T1046 port tarama tespiti |
 | 11 | [Alarm Triyajı ve Playbook'lar](11-alarm-triyaji/) | Alert triage + TP/FP/BTP + 3 triyaj playbook'u |
 | 12 | [Phishing / E-posta Analizi](12-phishing/) | Header + SPF/DKIM/DMARC + gerçek `.eml` analizi (GoPhish numunesi) |
+| 13 | [Threat Intel & IOC Zenginleştirme](13-threat-intel/) | CDB bloklist (100800-100802) + Pyramid of Pain + `if_group` dersi |
 | 14 | [Persistence (Kalıcılık)](14-persistence/) | T1547.001 Run key + T1053.005 scheduled task |
 | 15 | [Command & Control (C2)](15-c2/) | T1071 — şüpheli süreç dışarı bağlantısı + beaconing |
 | 17 | [Exfiltration / DNS Tunneling](17-exfiltration/) | T1048 — DNS tüneli: hacim + uzun subdomain |
 
 > **Numaralandırma notu:** Klasör numaraları birer **konu etiketidir**, kesintisiz bir sıra
-> değil. Öğrenme yolu saldırı kill-chain'ine göre ilerlediği için bazı numaralar (13 Threat Intel,
-> 16, 18–21) **yol haritasında sırada bekliyor** ve eklendikçe dolacak.
+> değil. Öğrenme yolu saldırı kill-chain'ine göre ilerlediği için bazı numaralar (16, 18–21)
+> **yol haritasında sırada bekliyor** ve eklendikçe dolacak.
 
 ## Durum
 
@@ -103,6 +104,7 @@ Ayrıntılı IP planı ve bridge'in getirdiği uyarılar için
 | 10 — FortiGate Entegrasyonu | ✅ Tamamlandı |
 | 11 — Alarm Triyajı ve Playbook'lar | ✅ Tamamlandı |
 | 12 — Phishing / E-posta Analizi | ✅ Tamamlandı |
+| 13 — Threat Intel & IOC Zenginleştirme | ✅ Tamamlandı |
 | 14 — Persistence (Kalıcılık) | ✅ Tamamlandı |
 | 15 — Command & Control (C2) | ✅ Tamamlandı |
 | 17 — Exfiltration / DNS Tunneling | ✅ Tamamlandı |
@@ -121,6 +123,7 @@ Ayrıntılı IP planı ve bridge'in getirdiği uyarılar için
 `Kerberoasting` · `Credential Dumping` · `Lateral Movement` · `Alert Triage` · `Playbook`
 `Persistence` · `Sysmon` · `Command & Control` · `Beaconing` · `Network Detection`
 `Exfiltration` · `DNS Tunneling` · `Phishing Analizi` · `E-posta Header Analizi` · `SPF/DKIM/DMARC`
+`Threat Intelligence` · `IOC / CDB Bloklist` · `Pyramid of Pain`
 
 ---
 *Bu lab eğitim amaçlıdır. Tüm saldırılar yalnızca kendi izole/ev laboratuvarımda,
