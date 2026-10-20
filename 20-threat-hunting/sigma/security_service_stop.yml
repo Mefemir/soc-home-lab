@@ -1,0 +1,42 @@
+title: Security or Monitoring Service Stop Attempt
+id: 7b3e1a9c-2d84-4f61-9c0a-1e5f2a7d9b01
+status: experimental
+description: |
+  Bir guvenlik/izleme servisinin (Wazuh, Sysmon, Microsoft Defender, Windows
+  Event Log) net/sc/powershell/wmic ile durdurulma denemesini tespit eder.
+  Saldirganlar tespitten kacmak icin once SIEM ajanini/EDR'yi susturur
+  (Defense Evasion). Bu kural, bu labdaki Threat Hunting avinda bulunan bir
+  tespit boslugundan dogmustur (Wazuh ozel kural 100910 karsiligi).
+references:
+  - https://attack.mitre.org/techniques/T1562/001/
+author: Melih Cafer Tasdemir
+date: 2026/10/19
+tags:
+  - attack.defense_evasion
+  - attack.t1562.001
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_tool:
+    Image|endswith:
+      - '\net.exe'
+      - '\net1.exe'
+      - '\sc.exe'
+      - '\powershell.exe'
+      - '\wmic.exe'
+  selection_action:
+    CommandLine|contains: 'stop'
+  selection_service:
+    CommandLine|contains:
+      - 'wazuh'
+      - 'ossec'
+      - 'windefend'
+      - 'sense'
+      - 'sysmon'
+      - 'securityhealthservice'
+      - 'eventlog'
+  condition: all of selection_*
+falsepositives:
+  - Yoneticinin mesru servis bakimi/guncellemesi
+level: high

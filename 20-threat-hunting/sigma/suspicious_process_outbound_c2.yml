@@ -1,0 +1,33 @@
+title: Suspicious Interpreter Making Outbound Network Connection (possible C2)
+id: c4d9f0a1-6b2e-4d37-8a91-0f3c7e2b4a52
+status: experimental
+description: |
+  Script yorumlayicilari / LOLBin'lerin (powershell, cmd, rundll32, mshta,
+  regsvr32) disari ag baglantisi kurmasini tespit eder. Bu surecler normalde
+  internete baglanmaz; bir reverse shell / C2 beacon isareti olabilir.
+  Wazuh ozel kural 100600 (C2) karsiligi.
+references:
+  - https://attack.mitre.org/techniques/T1071/
+author: Melih Cafer Tasdemir
+date: 2026/10/19
+tags:
+  - attack.command_and_control
+  - attack.t1071
+logsource:
+  category: network_connection
+  product: windows
+detection:
+  selection:
+    Initiated: 'true'
+    Image|endswith:
+      - '\powershell.exe'
+      - '\cmd.exe'
+      - '\rundll32.exe'
+      - '\mshta.exe'
+      - '\regsvr32.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+  condition: selection
+falsepositives:
+  - Internete mesru baglanan yonetim script'leri (allowlist ile daralt)
+level: high

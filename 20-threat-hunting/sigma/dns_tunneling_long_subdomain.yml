@@ -1,0 +1,27 @@
+title: Possible DNS Tunneling via Long Encoded Subdomain
+id: e2a7b5c8-9f14-4c60-b3d2-7a6e0c1f8d93
+status: experimental
+description: |
+  Anormal uzunlukta (>=25 karakter) tek parcali subdomain iceren DNS
+  sorgularini tespit eder. DNS tuneli, veriyi base32/base64 ile kodlayip
+  subdomain olarak disari sizdirir; bu da asiri uzun, rastgele gorunumlu
+  etiketler uretir (Exfiltration Over Alternative Protocol).
+  Wazuh ozel kural 100702 karsiligi.
+references:
+  - https://attack.mitre.org/techniques/T1048/
+author: Melih Cafer Tasdemir
+date: 2026/10/19
+tags:
+  - attack.exfiltration
+  - attack.t1048
+logsource:
+  category: dns_query
+  product: windows
+detection:
+  selection:
+    QueryName|re: '(?i)([a-z0-9+/=_-]{25,})\.'
+  condition: selection
+falsepositives:
+  - CDN / telemetri / cloud hizmetlerinin uzun ama mesru alt alan adlari
+  - Antivirus bulut sorgulari (allowlist ile daralt)
+level: high
