@@ -1,0 +1,108 @@
+{
+  "name": "SOC Ev Lab - Tespit Kapsama Haritasi",
+  "versions": {
+    "attack": "15",
+    "navigator": "4.9.1",
+    "layer": "4.5"
+  },
+  "domain": "enterprise-attack",
+  "description": "Ev SOC lab'inda uretilen ve tespit edilen ATT&CK teknikleri. Yesil = kural ile tespit ediliyor, Sari = kismi/dolayli tespit. Aralik: Asama 5-7.",
+  "filters": {
+    "platforms": ["Windows"]
+  },
+  "sorting": 0,
+  "layout": {
+    "layout": "side",
+    "aggregateFunction": "average",
+    "showID": true,
+    "showName": true
+  },
+  "hideDisabled": false,
+  "techniques": [
+    {
+      "techniqueID": "T1110",
+      "tactic": "credential-access",
+      "score": 100,
+      "color": "#2ecc71",
+      "enabled": true,
+      "comment": "Asama 5 - Brute Force. Ozel kural 100100 (level 10). RDP/oturum acma basarisizlik seli tespiti."
+    },
+    {
+      "techniqueID": "T1558.003",
+      "tactic": "credential-access",
+      "score": 100,
+      "color": "#2ecc71",
+      "enabled": true,
+      "comment": "Asama 6 - Kerberoasting. Ozel kural 100300 (level 12). Event 4769 + RC4 (0x17) sifreli servis bileti. Araçtan bagimsiz (teknik tespiti)."
+    },
+    {
+      "techniqueID": "T1003.001",
+      "tactic": "credential-access",
+      "score": 100,
+      "color": "#2ecc71",
+      "enabled": true,
+      "comment": "Asama 7 - LSASS Memory. Iki katman: 100310 (Mimikatz imza, Event 1) + 100320 (davranissal LSASS erisimi, Event 10, GrantedAccess). Davranis kurali araçtan bagimsiz."
+    },
+    {
+      "techniqueID": "T1021.002",
+      "tactic": "lateral-movement",
+      "score": 100,
+      "color": "#2ecc71",
+      "enabled": true,
+      "comment": "Asama 7 - SMB/Admin Shares (PsExec). Hazir Wazuh kurallari 92650 (level 12) + 92218 yakaladi. Ozel kural gerekmedi."
+    },
+    {
+      "techniqueID": "T1570",
+      "tactic": "lateral-movement",
+      "score": 100,
+      "color": "#2ecc71",
+      "enabled": true,
+      "comment": "Asama 7 - Lateral Tool Transfer (PsExec exe'yi ADMIN$ paylasimina birakti). Hazir ruleset kapsaminda."
+    },
+    {
+      "techniqueID": "T1569.002",
+      "tactic": "execution",
+      "score": 100,
+      "color": "#2ecc71",
+      "enabled": true,
+      "comment": "Asama 7 - Service Execution. PsExec servis olusturdu. Hazir kural 92307 (yeni servis kaydi) + 7045."
+    },
+    {
+      "techniqueID": "T1550.002",
+      "tactic": "lateral-movement",
+      "score": 50,
+      "color": "#f1c40f",
+      "enabled": true,
+      "comment": "Asama 7 - Pass-the-Hash (ilisikli). PsExec NTLM uzaktan oturum (4624 Type 3) uretti; 92652 yakaladi ama gercek hash ile PtH tam dogrulanmadi. Kismi."
+    },
+    {
+      "techniqueID": "T1562.001",
+      "tactic": "defense-evasion",
+      "score": 50,
+      "color": "#f1c40f",
+      "enabled": true,
+      "comment": "Asama 7 - Impair Defenses (Defender kapatma). Izlenebilir fakat henuz ozel kural yok. Kismi."
+    }
+  ],
+  "gradient": {
+    "colors": ["#ff6666", "#ffe766", "#8ec843"],
+    "minValue": 0,
+    "maxValue": 100
+  },
+  "legendItems": [
+    {
+      "label": "Tespit ediliyor (ozel veya hazir kural)",
+      "color": "#2ecc71"
+    },
+    {
+      "label": "Kismi / dolayli tespit",
+      "color": "#f1c40f"
+    }
+  ],
+  "metadata": [],
+  "links": [],
+  "showTacticRowBackground": true,
+  "tacticRowBackground": "#dddddd",
+  "selectTechniquesAcrossTactics": true,
+  "selectSubtechniquesWithParent": false
+}
